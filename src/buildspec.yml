@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    run-time versions:
+      nodejs: 16
+  pre_build:
+    commands:
+     - npm install
+     
+  build:
+    commands:
+     - npm run build
+
+  post_build:
+    commands:  
+    - aws s3 rm s3://my-first-react-app-phionah-bucket/ --recursive
+     - aws s3 cp build s3://my-first-react-app-phionah-bucket/ --recursive
